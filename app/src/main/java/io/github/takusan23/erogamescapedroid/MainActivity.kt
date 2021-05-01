@@ -1,27 +1,26 @@
 package io.github.takusan23.erogamescapedroid
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.viewModels
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import io.github.takusan23.erogamescapedroid.ui.GameInfoScreen
-import io.github.takusan23.erogamescapedroid.ui.theme.ErogameScapeDroidTheme
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import io.github.takusan23.erogamescapedroid.fragment.SearchFragment
 
-class MainActivity : ComponentActivity() {
-
-    private val viewModel by viewModels<MainViewModel>()
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            ErogameScapeDroidTheme {
-                Surface(color = MaterialTheme.colors.background) {
-                    // ゲーム詳細画面
-                    GameInfoScreen(viewModel = viewModel)
-                }
-            }
-        }
+        setContentView(R.layout.activity_main)
+
+        // 検索Fragmentを置く
+        setFragment(SearchFragment())
     }
+
+    fun setFragment(fragment: Fragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.activity_main_fragment_host_frame_layout, fragment)
+            .addToBackStack(System.currentTimeMillis().toString())
+            .commit()
+    }
+
 }

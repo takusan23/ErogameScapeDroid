@@ -1,4 +1,4 @@
-package io.github.takusan23.erogamescapedroid.ui.theme
+package io.github.takusan23.erogamescapedroid.compose.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

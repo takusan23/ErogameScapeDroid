@@ -1,4 +1,4 @@
-package io.github.takusan23.erogamescapedroid
+package io.github.takusan23.erogamescapedroid.network
 
 /**
  * ゲーム情報
