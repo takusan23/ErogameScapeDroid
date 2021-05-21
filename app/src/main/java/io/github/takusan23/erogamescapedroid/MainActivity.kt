@@ -54,12 +54,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun setFragment(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.activity_main_fragment_host_frame_layout, fragment)
-            .addToBackStack(System.currentTimeMillis().toString())
-            .commit()
-    }
-
 }
