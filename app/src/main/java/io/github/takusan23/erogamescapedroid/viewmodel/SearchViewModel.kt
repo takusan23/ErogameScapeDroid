@@ -10,7 +10,7 @@ import io.github.takusan23.erogamescapedroid.network.GameData
 import kotlinx.coroutines.launch
 
 /**
- * [io.github.takusan23.erogamescapedroid.SearchFragment]で使うViewModel
+ * 検索画面で使うViewModel
  * */
 class SearchViewModel(application: Application) : AndroidViewModel(application) {
 

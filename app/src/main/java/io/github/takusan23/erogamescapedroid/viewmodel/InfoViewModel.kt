@@ -10,7 +10,7 @@ import io.github.takusan23.erogamescapedroid.network.GameData
 import kotlinx.coroutines.launch
 
 /**
- * [io.github.takusan23.erogamescapedroid.fragment.InfoFragment]で使っているViewModel
+ * エロゲ詳細画面で使っているViewModel
  *
  * @param gameId ゲームID
  * */
@@ -29,7 +29,7 @@ class InfoViewModel(application: Application, private val gameId: Int) : Android
         viewModelScope.launch {
             val data = ErogameScape.getGameInfoFromId(gameId)
             if (data != null) {
-                _gameDataLiveData.postValue(data)
+                _gameDataLiveData.postValue(data!!)
             }
         }
     }

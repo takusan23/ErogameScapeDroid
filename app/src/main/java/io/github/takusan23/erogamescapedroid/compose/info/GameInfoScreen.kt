@@ -12,6 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -24,7 +25,7 @@ import io.github.takusan23.erogamescapedroid.viewmodel.InfoViewModel
  * ゲーム情報表示画面
  * */
 @Composable
-fun GameInfoScreen(viewModel: InfoViewModel) {
+fun GameInfoScreen(viewModel: InfoViewModel, onBack: () -> Unit) {
     val context = LocalContext.current
     // ゲーム情報
     val gameDataLiveData = viewModel.gameDataLiveData.observeAsState()
@@ -32,12 +33,15 @@ fun GameInfoScreen(viewModel: InfoViewModel) {
     Scaffold(
         topBar = {
             TopAppBar(
-
-            ) {
-                if (gameDataLiveData.value?.gamename != null) {
-                    Text(text = gameDataLiveData.value?.gamename!!, fontSize = 20.sp)
-                }
-            }
+                title = { },
+                navigationIcon = {
+                    IconButton(onClick = { onBack() }) {
+                        Icon(painter = painterResource(id = R.drawable.ic_baseline_arrow_back_24), contentDescription = "Menu Btn")
+                    }
+                },
+                elevation = 0.dp,
+                backgroundColor = Color.Transparent,
+            )
         }
     ) {
         if (gameDataLiveData.value != null) {

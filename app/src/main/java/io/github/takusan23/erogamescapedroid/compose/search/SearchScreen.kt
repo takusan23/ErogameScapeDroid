@@ -13,7 +13,7 @@ import io.github.takusan23.erogamescapedroid.viewmodel.SearchViewModel
  * 検索画面
  * */
 @Composable
-fun GameListScreen(viewModel: SearchViewModel, onClickItem: (GameData) -> Unit) {
+fun SearchScreen(viewModel: SearchViewModel, onClickItem: (GameData) -> Unit) {
     // 検索ワード
     val searchText = remember { mutableStateOf("") }
     // ゲーム情報

@@ -3,11 +3,14 @@ package io.github.takusan23.erogamescapedroid.compose.search
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import io.github.takusan23.erogamescapedroid.R
 
@@ -37,6 +40,8 @@ fun SearchBox(
                     }
                 },
                 value = searchText,
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+                keyboardActions = KeyboardActions(onSearch = { onClickSearchButton() }),
                 onValueChange = { text -> onChangeSearchText(text) },
                 placeholder = { Text(text = "ギャルゲ、エロゲのタイトルを入力") },
                 maxLines = 1,
