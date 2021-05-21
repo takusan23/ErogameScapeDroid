@@ -30,40 +30,48 @@ ErogameScapeの情報を見るだけ。
 ActivityにViewModel一つしか持てなくない？複数画面をJetpack Composeで作ってもViewModelは一つしか作れないじゃん。  
 既存のアプリに導入する場合は、とりあえずFragmentにComposeViewを使えばいいのですが、今回はActivityがそのままです。
 
-この問題を解決するために、Jetpack Compose版のNavigationライブラリを使います。これを利用することで、それぞれの画面でViewModelを持つことが出来ます。  
+この問題を解決するために、Jetpack Compose版のNavigationライブラリを使います。これを利用することで、Activityが同じ場合でもそれぞれの画面でViewModelを持つことが出来ます。  
 公式：https://developer.android.com/jetpack/compose/navigation?hl=ja
 
 ```kotlin
-override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContent {
-        // Navigation Compose ライブラリで画面遷移を行う
-        val navController = rememberNavController()
-        ErogameScapeDroidTheme {
-            Surface(color = MaterialTheme.colors.background) {
-                // ここを画面遷移
-                // Navigation Composeライブラリを使うと一つのActivityでも各ベージにそれぞれViewModelが持てる
-                NavHost(navController = navController, startDestination = "search") {
-                    composable("search") {
-                        // 検索
-                        SearchScreen(viewModel = viewModel()) {
-                            // 画面をエロゲ詳細画面へ飛ばす
-                            navController.navigate("game/${it.id}")
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContent {
+            // Navigation Compose ライブラリで画面遷移を行う
+            val navController = rememberNavController()
+
+            ErogameScapeDroidTheme {
+                Surface(color = MaterialTheme.colors.background) {
+
+                    // ここを画面遷移
+                    // Navigation Composeライブラリを使うと一つのActivityでも各ベージにそれぞれViewModelが持てる
+                    NavHost(navController = navController, startDestination = "search") {
+                        composable("search") {
+                            // 検索
+                            SearchScreen(viewModel = viewModel()) {
+                                // 画面をエロゲ詳細画面へ飛ばす
+                                navController.navigate("game/${it.id}")
+                            }
+                        }
+                        composable("game/{id}") { backStackEntry ->
+                            // 詳細画面
+                            val gameId = backStackEntry.arguments?.getString("id")?.toInt()!!
+                            // ViewModelに引数を渡すためのFactoryもちゃんと対応している
+                            GameInfoScreen(viewModel = viewModel(factory = InfoViewModelFactory(application, gameId))) {
+                                // 前の画面（検索画面に戻る）
+                                navController.popBackStack()
+                            }
                         }
                     }
-                    composable("game/{id}") { backStackEntry ->
-                        // 詳細画面
-                        val gameId = backStackEntry.arguments?.getString("id")?.toInt()!!
-                        // ViewModelに引数を渡すためのFactoryもちゃんと対応している
-                        GameInfoScreen(viewModel = viewModel(factory = InfoViewModelFactory(application, gameId))) {
-                            // 前の画面（検索画面に戻る）
-                            navController.popBackStack()
-                        }
-                    }
+
                 }
             }
         }
     }
+
 }
 ```
 
