@@ -24,7 +24,7 @@ fun SearchBox(
     onClickSearchButton: () -> Unit,
 ) {
     Card(
-        modifier = Modifier.padding(5.dp),
+        modifier = Modifier.padding(10.dp),
         elevation = 10.dp,
         shape = RoundedCornerShape(10.dp)
     ) {

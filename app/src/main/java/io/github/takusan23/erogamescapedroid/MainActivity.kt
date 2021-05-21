@@ -5,12 +5,10 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navigation
 import io.github.takusan23.erogamescapedroid.compose.GameInfoScreen
 import io.github.takusan23.erogamescapedroid.compose.SearchScreen
 import io.github.takusan23.erogamescapedroid.compose.theme.ErogameScapeDroidTheme
