@@ -112,6 +112,21 @@ class InfoViewModelFactory(val application: Application, val gameId: Int) : View
 }
 ```
 
+`{id}`の部分は`backStackEntry#arguments#getString`で取れる。
+
+```kotlin
+// 省略
+composable("game/{id}") { backStackEntry ->
+    // 詳細画面
+    val gameId = backStackEntry.arguments?.getString("id")?.toInt()!!
+    // ViewModelに引数を渡すためのFactoryもちゃんと対応している
+    GameInfoScreen(viewModel = viewModel(factory = InfoViewModelFactory(application, gameId))) {
+        // 前の画面（検索画面に戻る）
+        navController.popBackStack()
+    }
+}
+```
+
 
 # おまけ
 使ったSQL。
