@@ -25,13 +25,8 @@ ErogameScapeの情報を見るだけ。
     - https://erogamescape.dyndns.org/~ap2/ero/toukei_kaiseki/sql_for_erogamer_form.php をスクレイピングするため
 
 # Jetpack Compose で ViewModel
-今回ははじめからJetpack Composeを使ったためViewModelを使おうとすると問題が発生します。  
-
-ActivityにViewModel一つしか持てなくない？複数画面をJetpack Composeで作ってもViewModelは一つしか作れないじゃん。  
-既存のアプリに導入する場合は、とりあえずFragmentにComposeViewを使えばいいのですが、今回はActivityがそのままです。
-
-この問題を解決するために、Jetpack Compose版のNavigationライブラリを使います。これを利用することで、Activityが同じ場合でもそれぞれの画面でViewModelを持つことが出来ます。  
-公式：https://developer.android.com/jetpack/compose/navigation?hl=ja
+なんかViewModelが普通に使えた。
+同じスコープ（Activity）だから駄目だと思ってたんだけど、ViewModelにKeyを付けることで同じスコープでも複数のViewModelが持てるらしい。
 
 ```kotlin
 class MainActivity : AppCompatActivity() {
