@@ -47,7 +47,6 @@ class MainActivity : AppCompatActivity() {
                 Surface(color = MaterialTheme.colors.background) {
 
                     // ここを画面遷移
-                    // Navigation Composeライブラリを使うと一つのActivityでも各ベージにそれぞれViewModelが持てる
                     NavHost(navController = navController, startDestination = "search") {
                         composable("search") {
                             // 検索
@@ -132,11 +131,12 @@ composable("game/{id}") { backStackEntry ->
 使ったSQL。
 
 ```sql
-SELECT DISTINCT g.id,
+ SELECT DISTINCT g.id,
     g.gamename,
     c.content,
     c.name,
     c.end_timestamp,
+    c.url,
     g.furigana,
     g.sellday,
     g.brandname,
@@ -156,6 +156,7 @@ FROM gamelist g
         SELECT g.content,
             l.name,
             g.game,
+            l.url,
             l.end_timestamp
         FROM campaign_game g
             INNER JOIN campaignlist l ON g.campaign = l.id

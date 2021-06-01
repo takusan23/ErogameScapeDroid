@@ -10,6 +10,7 @@ package io.github.takusan23.erogamescapedroid.network
  * @param brandname_id ブランドのID
  * @param brandname ブランド名
  * @param content セール情報
+ * @param sale_url セール会場URL
  * @param end_time_stamp セール終了日時
  * @param model PCとかPSVとか
  * @param name セール名
@@ -24,12 +25,13 @@ package io.github.takusan23.erogamescapedroid.network
  * @param min2 最低得点
  * @param shoukai オフィシャルHPのURL
  * */
-data class GameData(
+open class GameData(
     val id: Int,
     val gamename: String,
     val content: String,
     val name: String,
     val end_time_stamp: String,
+    val sale_url: String,
     val furigana: String,
     val sellday: String,
     val brandname_id: Int,

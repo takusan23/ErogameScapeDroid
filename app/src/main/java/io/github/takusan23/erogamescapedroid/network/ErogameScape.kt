@@ -30,6 +30,7 @@ object ErogameScape {
     c.content,
     c.name,
     c.end_timestamp,
+    c.url,
     g.furigana,
     g.sellday,
     g.brandname,
@@ -49,6 +50,7 @@ FROM gamelist g
         SELECT g.content,
             l.name,
             g.game,
+            l.url,
             l.end_timestamp
         FROM campaign_game g
             INNER JOIN campaignlist l ON g.campaign = l.id
@@ -87,6 +89,7 @@ WHERE g.gamename LIKE '%${gameName}%'
     c.content,
     c.name,
     c.end_timestamp,
+    c.url,
     g.furigana,
     g.sellday,
     g.brandname,
@@ -106,6 +109,7 @@ FROM gamelist g
         SELECT g.content,
             l.name,
             g.game,
+            l.url,
             l.end_timestamp
         FROM campaign_game g
             INNER JOIN campaignlist l ON g.campaign = l.id
@@ -146,19 +150,20 @@ WHERE g.id = '$gameId'
             val content = tdList[2].text()
             val name = tdList[3].text()
             val end_time_stamp = tdList[4].text()
-            val furigana = tdList[5].text()
-            val sellday = tdList[6].text()
-            val brandname_id = tdList[7].text().toInt()
-            val brandname = tdList[8].text()
-            val model = tdList[9].text()
-            val median = tdList[10].text().toInt()
-            val average2 = tdList[11].text().toInt()
-            val stdev = tdList[12].text().toInt()
-            val count2 = tdList[13].text().toInt()
-            val dmm = tdList[14].text()
-            val max2 = tdList[15].text().toInt()
-            val min2 = tdList[16].text().toInt()
-            val shoukai = tdList[17].text()
+            val sale_url = tdList[5].text()
+            val furigana = tdList[6].text()
+            val sellday = tdList[7].text()
+            val brandname_id = tdList[8].text().toInt()
+            val brandname = tdList[9].text()
+            val model = tdList[10].text()
+            val median = tdList[11].text().toInt()
+            val average2 = tdList[12].text().toInt()
+            val stdev = tdList[13].text().toInt()
+            val count2 = tdList[14].text().toInt()
+            val dmm = tdList[15].text()
+            val max2 = tdList[16].text().toInt()
+            val min2 = tdList[17].text().toInt()
+            val shoukai = tdList[18].text()
             // データクラスへ
             val gameData = GameData(
                 id,
@@ -166,6 +171,7 @@ WHERE g.id = '$gameId'
                 content,
                 name,
                 end_time_stamp,
+                sale_url,
                 furigana,
                 sellday,
                 brandname_id,
